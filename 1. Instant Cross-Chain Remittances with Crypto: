@@ -1,0 +1,21 @@
+solidity
+// Ethereum smart contract for cross-chain remittance
+pragma solidity ^0.8.0;
+
+contract CrossChainRemittance {
+    event FundsSent(address indexed recipient, uint256 amount);
+    
+    function sendFunds(address payable recipient) public payable {
+        require(msg.value > 0, "Amount must be greater than 0");
+        
+        recipient.transfer(msg.value);
+        emit FundsSent(recipient, msg.value);
+        
+        // Notify other chains (pseudo-function)
+        notifySolanaChain(recipient, msg.value);
+    }
+
+    function notifySolanaChain(address recipient, uint256 amount) private {
+        // Implementation to notify Solana chain
+    }
+}
